@@ -17,46 +17,54 @@
       position: fixed;
       top: 0;
       width: 100%;
-      height: 60px;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       display: flex;
-      justify-content: center;
-      gap: 40px;
+      justify-content: space-between;
       align-items: center;
+      padding: 10px 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       z-index: 100;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
     }
 
     header a {
       text-decoration: none;
       color: #333;
       font-weight: bold;
-      cursor: pointer;
     }
 
     header a:hover {
       color: #c09;
     }
 
-    /* ==== LOGO FIXE ==== */
-    .hero-logo-fixed {
-      position: fixed;
-      top: 10px;
-      left: 20px;
-      background: rgba(130, 97, 143, 0.5);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 200;
+    /* ==== BURGER MENU ==== */
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
     }
 
-    .hero-logo-fixed img.hero-logo {
-      height: 40px;
-      width: auto;
-      display: block;
+    .burger span {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      border-radius: 3px;
     }
 
     /* ==== SECTIONS ==== */
@@ -104,11 +112,14 @@
 
     .gallery img {
       width: 100%;
+      height: auto;
+      object-fit: cover;
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
+
     .gallery img:hover {
       transform: translateY(-6px) scale(1.03);
       box-shadow: 0 10px 20px rgba(0,0,0,0.12);
@@ -120,6 +131,13 @@
       margin: auto;
       text-align: center;
       line-height: 1.6;
+    }
+
+    section img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
     }
 
     /* ==== CONTACT ==== */
@@ -162,39 +180,81 @@
       font-size: 0.9rem;
     }
 
-    @media (max-width:600px){
-      #accueil h1 { font-size: 2rem; padding: 12px 14px; }
-      .hero-logo-fixed { top: 5px; left: 10px; padding: 4px 8px; font-size: 0.9rem; }
+    /* ==== SOCIAL ICON ==== */
+    .social-icon {
+      width: 80px;
+      height: 40px;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+      cursor: pointer;
     }
 
-    .social-icon {
-  width: 80px;  /* taille de l'icône */
-  height: 40px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
 
-.social-icon:hover {
-  transform: scale(1.2);
-}
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        background: white;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 15px 0;
+      }
 
+      nav.active {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      #accueil h1 {
+        font-size: 2rem;
+        padding: 12px 14px;
+      }
+
+      header {
+        padding: 8px 12px;
+      }
+
+      .hero-logo {
+        height: 30px;
+      }
+
+      header a {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- Logo fixe sur toutes les pages -->
-<div class="hero-logo-fixed">
-  <img src="images/logo.png" alt="Logo" class="hero-logo">
-  <span>GML Creatio</span>
-</div>
-
-<!-- Menu -->
+<!-- Header -->
 <header>
-  <a href="#" data-page="accueil">Accueil</a>
-  <a href="#" data-page="collection">Collections</a>
-  <a href="#" data-page="presentation">Présentation</a>
-  <a href="#" data-page="contact">Contact</a>
+  <div class="header-logo">
+    <img src="images/logo.png" alt="Logo" class="hero-logo">
+    <span>GML Creatio</span>
+  </div>
+  <div class="burger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav>
+    <a href="#" data-page="accueil">Accueil</a>
+    <a href="#" data-page="collection">Collections</a>
+    <a href="#" data-page="presentation">Présentation</a>
+    <a href="#" data-page="contact">Contact</a>
+  </nav>
 </header>
 
 <!-- === SECTIONS === -->
@@ -216,7 +276,7 @@
   <h2 style="text-align:center;">Qui suis-je ?</h2>
   <div class="presentation">
     <p>
-Passionnée de couture et de créaion sur mesure, blablabla commande ta robe et lache le bifton
+      Passionnée de couture et de création sur mesure, blablabla commande ta robe et lâche le bifton
     </p>
     <img src="images/presentation2.jpg" alt="Présentation 1">
     <img src="images/presentation3.jpg" alt="Présentation 2">
@@ -225,7 +285,7 @@ Passionnée de couture et de créaion sur mesure, blablabla commande ta robe et 
 </section>
 
 <section id="contact">
-  <h2 style="text-align:center;">Contactez moi</h2>
+  <h2 style="text-align:center;">Contactez-moi</h2>
   <form onsubmit="event.preventDefault(); alert('Formulaire simulé — ajouter envoi serveur')">
     <input type="text" placeholder="Votre nom" required>
     <input type="email" placeholder="Votre email" required>
@@ -233,34 +293,40 @@ Passionnée de couture et de créaion sur mesure, blablabla commande ta robe et 
     <textarea rows="5" placeholder="Votre message" required></textarea>
     <button type="submit">Envoyer</button>
   </form>
-    <h3 style="text-align:center;">Suivez moi sur les résaux</h3>
+  <h3 style="text-align:center;">Suivez-moi sur les réseaux</h3>
   <div class="contact-social" style="text-align:center; margin-top:20px;">
-  <a href="https://www.instagram.com/gmlcreatio/" target="_blank">
-    <img src="images/instagram.png" alt="Instagram" class="social-icon">
-  </a>
-</div>
-
+    <a href="https://www.instagram.com/gmlcreatio/" target="_blank">
+      <img src="images/instagram.png" alt="Instagram" class="social-icon">
+    </a>
+  </div>
 </section>
 
 <footer>
   © 2025 Votre Maison de Mariée - Tous droits réservés
 </footer>
 
-<!-- === SCRIPT SPA avec scroll ajusté ==== -->
+<!-- === SCRIPT SPA + BURGER ==== -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const HEADER_HEIGHT = 60; // hauteur du header fixe
-
+  const HEADER_HEIGHT = 60;
   const links = document.querySelectorAll('header a[data-page]');
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('nav');
+
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const pageId = this.dataset.page;
       showPage(pageId);
+      nav.classList.remove('active'); // referme le menu après clic
     });
   });
 
-  // Affiche la page d'accueil au départ
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+
+  // Page par défaut
   showPage('accueil');
 
   function showPage(pageId){
@@ -271,7 +337,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if(!target) return;
     target.classList.add('active');
 
-    // Scroll ajusté pour header fixe
     const y = Math.max(target.getBoundingClientRect().top + window.pageYOffset - HEADER_HEIGHT, 0);
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
@@ -280,4 +345,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </body>
 </html>
-
